@@ -13,10 +13,13 @@ sort_versions() {
 }
 
 list_all_versions() {
-  json_parse "$json" |
-    sed 's/^\[\(.*\)\].*$/\1/' |
-    grep -Eo '[0-9]+.[0-9]+.[0-9]+' |
-    uniq
+  {
+    echo "master"
+    json_parse "$json" |
+        sed 's/^\[\(.*\)\].*$/\1/' |
+        grep -Eo '[0-9]+.[0-9]+.[0-9]+' |
+        uniq
+  }
 }
 
 list_all_versions | sort_versions | xargs echo
